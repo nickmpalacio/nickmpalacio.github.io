@@ -10,7 +10,15 @@ function getData(){
     let resturantName = document.getElementById('restaurantInput').value.toUpperCase()
 
     //need to add in if statement to use different urls when user inputs all search terms, 2, or just 1
-    const url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'dba=' + resturantName + '&boro=' + reformattedBoroughName
+
+    let url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'dba=' + resturantName
+
+
+    if (reformattedBoroughName =! null){
+       
+    } else {
+      
+    }
 
     fetch (url)
     .then((res) => res.json())
