@@ -1,0 +1,35 @@
+// $.ajax({
+//     url: "https://data.cityofnewyork.us/resource/ridc-7qqg.json",
+//     type: "GET",
+//     data: {
+//       "$limit" : 5000,
+//       "$$app_token" : "6IMQCb5Bo7dqH3nvFMfVF802e"
+//     }
+// }).done(function(data) {
+//   alert("Retrieved " + data.length + " records from the dataset!");
+//   console.log(data);
+//   console.log('success')
+// });
+
+
+
+let boroughName
+let streetName
+
+
+function getData(){
+
+    let resturantName = document.getElementById('restaurantInput').value.toUpperCase()
+    const url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'dba=' + resturantName
+
+    fetch (url)
+    .then((res) => res.json())
+    .then(data => {
+        console.log(data);
+        console.log(resturantName)
+        console.log(url)
+    })
+    .catch((err) => console.log('something went wrong', err))
+}
+
+document.getElementById("submit").addEventListener('click', getData)
