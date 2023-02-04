@@ -41,7 +41,11 @@ function getData(){
         console.log(url)
         
     })
-    .then(() => document.getElementById('restaurantInput').value = '')    
+    .then(() => {
+        document.getElementById('restaurantInput').value = ''
+        document.getElementById('boroughInput').value = ''
+        document.getElementById('streetInput').value = ''
+    })    
     .catch((err) => console.log('something went wrong', err))
 }
 
