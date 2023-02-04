@@ -5,6 +5,10 @@ function getData(){
     clearRestaurantResult.replaceChildren()
     const clearLocations = document.getElementById('restaurantLocationList')
     clearLocations.replaceChildren()
+    const clearInspections = document.getElementById('inspectionDateDetail')
+    clearInspections.replaceChildren()
+    const clearViolations = document.getElementById('violationDetail')
+    clearViolations.replaceChildren()
 
     const boroughName = document.getElementById('boroughInput').value.toString()
     const reformattedBoroughName = capitalize(boroughName)
@@ -44,25 +48,33 @@ function getData(){
         console.log(data);
         console.log(resturantName)
         console.log(url)
-        document.getElementById('restaurantTitle').innerText = data[0].dba
+       // document.getElementById('restaurantTitle').innerText = data[0].dba
         for (i in data){
-                const newLocationItem = document.createElement('li')
-                const newLocation = document.createTextNode(data[i].street)
+
+                const newRestaurantItem = document.createElement('p')
+                const newRestaurant = document.createTextNode(data[i].dba)
+                newRestaurantItem.appendChild(newRestaurant)
+                const restaurantElem = document.getElementById('restaurantTitle')
+                console.log(restaurantElem)
+                restaurantElem.appendChild(newRestaurantItem)
+
+                const newLocationItem = document.createElement('p')
+                const newLocation = document.createTextNode(data[i].building + ' ' + data[i].street + ' ' + data[i].boro)
                 newLocationItem.appendChild(newLocation)
                 const elem = document.getElementById('restaurantLocationList')
                 console.log(elem)
                 elem.appendChild(newLocationItem)
 
                 const newInspectionItem = document.createElement('p')
-                const newInspectionDate = document.createTextNode(data[i].inspection_date)
+                const newInspectionDate = document.createTextNode(data[i].inspection_date.slice(0, 10))
                 newInspectionItem.appendChild(newInspectionDate)
                 console.log(newInspectionItem)
                 const elem2 = document.getElementById("inspectionDateDetail")
                 console.log(elem2)
                 elem2.appendChild(newInspectionItem)
 
-                const newViolationItem = document.createElement('li')
-                const newViolation = document.createTextNode(data[i].violation_description + ' 🛑 CRITICALITY? ' + data[i].critical_flag)
+                const newViolationItem = document.createElement('p')
+                const newViolation = document.createTextNode('🛑' + data[i].violation_description + ' ⏯️ CRITICALITY? ' + data[i].critical_flag)
                 newViolationItem.appendChild(newViolation)
                 const elem3 = document.getElementById('violationDetail')
                 console.log(elem3)
