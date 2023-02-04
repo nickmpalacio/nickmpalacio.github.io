@@ -46,11 +46,28 @@ function getData(){
         console.log(url)
         document.getElementById('restaurantTitle').innerText = data[0].dba
         for (i in data){
-                const newLocationItem = document.createElement('p')
+                const newLocationItem = document.createElement('li')
                 const newLocation = document.createTextNode(data[i].street)
                 newLocationItem.appendChild(newLocation)
                 const elem = document.getElementById('restaurantLocationList')
+                console.log(elem)
                 elem.appendChild(newLocationItem)
+
+                const newInspectionItem = document.createElement('p')
+                const newInspectionDate = document.createTextNode(data[i].inspection_date)
+                newInspectionItem.appendChild(newInspectionDate)
+                console.log(newInspectionItem)
+                const elem2 = document.getElementById("inspectionDateDetail")
+                console.log(elem2)
+                elem2.appendChild(newInspectionItem)
+
+                const newViolationItem = document.createElement('li')
+                const newViolation = document.createTextNode(data[i].violation_description + ' 🛑 CRITICALITY? ' + data[i].critical_flag)
+                newViolationItem.appendChild(newViolation)
+                const elem3 = document.getElementById('violationDetail')
+                console.log(elem3)
+                elem3.appendChild(newViolationItem)
+                
         }
     })
     .then(() => {
@@ -68,8 +85,4 @@ document.getElementById("submit").addEventListener('click', getData)
 function capitalize(string){
 
     return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
-function updateResults(){
-
 }
