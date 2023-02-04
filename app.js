@@ -1,23 +1,36 @@
 
-
-
-
 function getData(){
 
-    let boroughName = document.getElementById('boroughInput').value.toString()
-    let reformattedBoroughName = capitalize(boroughName)
-    let streetName = document.getElementById('streetInput').value.toUpperCase()
-    let resturantName = document.getElementById('restaurantInput').value.toUpperCase()
-    console.log(boroughName)
+    const boroughName = document.getElementById('boroughInput').value.toString()
+    const reformattedBoroughName = capitalize(boroughName)
+    const streetName = document.getElementById('streetInput').value.toUpperCase()
+    const resturantName = document.getElementById('restaurantInput').value.toUpperCase()
+    console.log(reformattedBoroughName)
+    console.log(resturantName)
+    console.log(typeof(resturantName))
+    console.log(streetName)
 
     //need to add in if statement to use different urls when user inputs all search terms, 2, or just 1
 
     let url
 
-    if (reformattedBoroughName.value =! ''){
-         url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'dba=' + resturantName + '&boro=' + reformattedBoroughName
+    if ((resturantName != '') && (reformattedBoroughName == '') && (streetName == '')){
+        url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'dba=' + resturantName
+    } else if ((resturantName != '') && (reformattedBoroughName != '') && (streetName == '')){
+        url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'dba=' + resturantName + '&boro=' + reformattedBoroughName
+    } else if ((resturantName != '') && (reformattedBoroughName != '') && (streetName != '')) {
+         url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'dba=' + resturantName + '&boro=' + reformattedBoroughName + '&street=' + streetName
+    } else if((resturantName == '') && (reformattedBoroughName != '') && (streetName == '')){
+        url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' +  'boro=' + reformattedBoroughName
+    } else if((resturantName =='') && (reformattedBoroughName != '') && (streetName != '')){
+        url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' +  'boro=' + reformattedBoroughName + '&street=' + streetName
+    }else if((resturantName == '') && (reformattedBoroughName == '') && (streetName != '')){
+        url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'street=' + streetName
+    }else if((resturantName == '') && (reformattedBoroughName == '') && (streetName == '')){
+        //add in some message to user about inputting search data
+        url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?'
     } else {
-         url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'dba=' + resturantName
+        url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'dba=' + resturantName + '&street=' + streetName
     }
 
     fetch (url)
