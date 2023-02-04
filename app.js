@@ -24,9 +24,9 @@ function getData(){
         url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' +  'boro=' + reformattedBoroughName
     } else if((resturantName =='') && (reformattedBoroughName != '') && (streetName != '')){
         url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' +  'boro=' + reformattedBoroughName + '&street=' + streetName
-    }else if((resturantName == '') && (reformattedBoroughName == '') && (streetName != '')){
+    } else if((resturantName == '') && (reformattedBoroughName == '') && (streetName != '')){
         url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'street=' + streetName
-    }else if((resturantName == '') && (reformattedBoroughName == '') && (streetName == '')){
+    } else if((resturantName == '') && (reformattedBoroughName == '') && (streetName == '')){
         //add in some message to user about inputting search data
         url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?'
     } else {
@@ -39,6 +39,7 @@ function getData(){
         console.log(data);
         console.log(resturantName)
         console.log(url)
+        document.getElementById('restaurantTitle').innerText = data[0].dba
         
     })
     .then(() => {
@@ -49,10 +50,15 @@ function getData(){
     .catch((err) => console.log('something went wrong', err))
 }
 
+
 document.getElementById("submit").addEventListener('click', getData)
 
 
 function capitalize(string){
 
     return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+function updateResults(){
+
 }
