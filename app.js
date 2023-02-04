@@ -1,6 +1,11 @@
 
 function getData(){
 
+    const clearRestaurantResult = document.getElementById('restaurantTitle')
+    clearRestaurantResult.replaceChildren()
+    const clearLocations = document.getElementById('restaurantLocationList')
+    clearLocations.replaceChildren()
+
     const boroughName = document.getElementById('boroughInput').value.toString()
     const reformattedBoroughName = capitalize(boroughName)
     const streetName = document.getElementById('streetInput').value.toUpperCase()
@@ -40,12 +45,13 @@ function getData(){
         console.log(resturantName)
         console.log(url)
         document.getElementById('restaurantTitle').innerText = data[0].dba
-        const newLocationItem = document.createElement('p')
-        const newLocation = document.createTextNode(data[0].street)
-        newLocationItem.appendChild(newLocation)
-        const elem = document.getElementById('restaurantLocationList')
-        elem.appendChild(newLocationItem)
-        
+        for (i in data){
+                const newLocationItem = document.createElement('p')
+                const newLocation = document.createTextNode(data[i].street)
+                newLocationItem.appendChild(newLocation)
+                const elem = document.getElementById('restaurantLocationList')
+                elem.appendChild(newLocationItem)
+        }
     })
     .then(() => {
         document.getElementById('restaurantInput').value = ''
