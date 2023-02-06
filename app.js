@@ -42,7 +42,7 @@ function getData(){
     
        //if user does not input any search terms
                 const addSearchtext = document.createElement('p')
-                const searchText = document.createTextNode('you need to enter in at least 1 search term!')
+                const searchText = document.createTextNode('try entering at least 1 search term like a restaurant!')
                 addSearchtext.appendChild(searchText)
                 const elem4 = document.getElementById("noSearchText")
                 elem4.appendChild(addSearchtext)
