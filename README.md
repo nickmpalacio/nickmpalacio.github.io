@@ -15,7 +15,7 @@ Retrieve results of restaurant inspection violations for dining establishments i
 
 ### Open Issues + Work ons
 
-- Better filtering of API response results - if you do not enter in a Restaurant name and only include boroough or street name, some of the values are 'undefined' for restaurant name
+- Better filtering of API response results - if you do not enter in a Restaurant name and only include borough or street name, some of the values are 'undefined' for restaurant name
 - Better formatting - would like to clean up UI to align inspection dates & violation descriptions to help users understand if a violation was recent or from a few years ago
 - Better formatting - would also like to aggregate violations together in an expandable dropdown a user can click on that's tied to one restaurant name instead of displaying the restaurant name over and over again
 - more guidance to the user on if they should dash or dine, perhaps with messaging around the score (not always available from dataset) or the number of critical violations
