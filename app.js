@@ -1,6 +1,7 @@
 
 function getData(){
 
+    //clearing results before running another search
     const clearRestaurantResult = document.getElementById('restaurantTitle')
     clearRestaurantResult.replaceChildren()
     const clearLocations = document.getElementById('restaurantLocationList')
@@ -9,14 +10,17 @@ function getData(){
     clearInspections.replaceChildren()
     const clearViolations = document.getElementById('violationDetail')
     clearViolations.replaceChildren()
+    const clearNoSearchText = document.getElementById('noSearchText')
+    clearNoSearchText.replaceChildren()
 
+    //storing user inputs
     const boroughName = document.getElementById('boroughInput').value.toString()
     const reformattedBoroughName = capitalize(boroughName)
     const streetName = document.getElementById('streetInput').value.toUpperCase()
     const resturantName = document.getElementById('restaurantInput').value.toUpperCase()
    
 
-    //need to add in if statement to use different urls when user inputs all search terms, 2, or just 1
+    //use different urls when user inputs all search terms, 2, or just 1
 
     let url
 
@@ -34,7 +38,15 @@ function getData(){
         url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'street=' + streetName
     } else if((resturantName == '') && (reformattedBoroughName == '') && (streetName == '')){
         //add in some message to user about inputting search data
-        url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?'
+       // url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?'
+    
+       //if user does not input any search terms
+                const addSearchtext = document.createElement('p')
+                const searchText = document.createTextNode('you need to enter in at least 1 search term!')
+                addSearchtext.appendChild(searchText)
+                const elem4 = document.getElementById("noSearchText")
+                elem4.appendChild(addSearchtext)
+        
     } else {
         url = 'https://data.cityofnewyork.us/resource/43nn-pn8j.json?' + 'dba=' + resturantName + '&street=' + streetName
     }
@@ -65,7 +77,7 @@ function getData(){
                 elem2.appendChild(newInspectionItem)
 
                 const newViolationItem = document.createElement('p')
-                const newViolation = document.createTextNode('🛑' + data[i].violation_description + ' ⏯️ CRITICALITY? ' + data[i].critical_flag)
+                const newViolation = document.createTextNode('🛑 ' + data[i].violation_description + ' \n ⏯️ CRITICALITY? ' + data[i].critical_flag)
                 newViolationItem.appendChild(newViolation)
                 const elem3 = document.getElementById('violationDetail')
                 elem3.appendChild(newViolationItem)
@@ -83,7 +95,7 @@ function getData(){
 
 document.getElementById("submit").addEventListener('click', getData)
 
-
+//capitalize borough name in order to correctly hit api
 function capitalize(string){
 
     return string.charAt(0).toUpperCase() + string.slice(1)
